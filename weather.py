@@ -1,7 +1,7 @@
 import json
 import requests
 
-token = open("weather_token.txt", "r").read()
+token = open("tokens/weather_token.txt", "r").read()
 base_url = "https://api.openweathermap.org/data/2.5/"
 
 
@@ -21,3 +21,12 @@ def get_current_weather(city, country):
         # return json.loads(response.content.decode('utf-8'))
     else:
         return response.content
+
+
+def main():
+    response = get_current_weather("perth", "au")
+    print(response)
+
+
+if __name__ == "__main__":
+    main()
