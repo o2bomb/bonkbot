@@ -20,7 +20,6 @@ def get_tts(source, language, speed):
     if response.status_code == 200:
         with open("temp.mp3", "wb") as f:
             f.write(response.content)
-        time.sleep(0.5)
     else:
         print(f"Error: {response.content}")
 
