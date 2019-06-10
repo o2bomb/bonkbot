@@ -32,12 +32,12 @@ def package(content):
     json_obj.pop("clouds")
     json_obj.pop("dt")
     json_obj.pop("cod")
-    pyperclip.copy(str(json_obj))
     return json_obj
 
 
 def main():
     response = get_current_weather("perth", "au")
+    pyperclip.copy(str(response))
     print(response)
 
 
