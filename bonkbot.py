@@ -8,6 +8,9 @@ bot = commands.Bot(command_prefix='bonk.')
 
 
 def get_channel_info():
+    # @Improve
+    # Returns all the channels as a dictionary,
+    # where key = channel_name and value = channel_object
     server = bot.get_guild(403553600384794624)
     print(server.name)
     channels = {}
@@ -26,8 +29,14 @@ async def kill(ctx):
 
 @bot.command()
 async def forecast(ctx, city, country=""):
+    # @Improve
     result = weather.get_current_weather(city, country)
-    await ctx.send(result)
+    forecast_embed = discord.Embed(title="Forecast", description=f"Today's forecast for {city}, {result['sys']['country']}", color=0x4d5ef7)
+    forecast_embed.set_image(url=f"https://openweathermap.org/img/w/{result['weather'][0]['icon']}.png")
+    forecast_embed.add_field(name=f"Average: {result['main']['temp']}°C", value=f"Min: {result['main']['temp_min']}°C, Max: {result['main']['temp_max']}°C", inline=True)
+    forecast_embed.add_field(name=f"{result['weather'][0]['main']}", value=f"{result['weather'][0]['description']}", inline=True)
+    forecast_embed.set_footer(text="Weather data provided by OpenWeatherMaps")
+    await ctx.send(embed=forecast_embed)
 
 
 @bot.event
