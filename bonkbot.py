@@ -1,10 +1,12 @@
 import discord
+import os
 import weather
 import texttospeech
 from discord.ext import commands
 
 token = open("tokens/token.txt", "r").read()
 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 bot = commands.Bot(command_prefix='bonk.')
 
 
@@ -31,10 +33,19 @@ async def kill(ctx):
 @bot.command()
 async def tts(ctx, source, language="en-us", speed="0"):
     # @Improve
-    vc = ctx.author.voice
-    if vc is not None:    # If the author of the command is in a voice channel
+    v_state = ctx.author.voice
+    if len(source) > 60:
+        await ctx.send("Source cannot be longer than 60 characters. This is to reduce bandwidth.")
+    elif v_state is not None:    # If the author of the command is in a voice channel
+        if bot.user not in v_state.channel.members:
+            v_client = await v_state.channel.connect()
+        else:
+            for v_client in bot.voice_clients:
+                if v_client == v_state.channel:
+                    break
         texttospeech.get_tts(source, language, speed)
-        stream = await vc.channel.connect()
+        audio_src = discord.FFmpegPCMAudio('temp.mp3')
+        v_client.play(audio_src)
     else:
         print("Error: TTS failed. Author is not in a voice channel.")
 
