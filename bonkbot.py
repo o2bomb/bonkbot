@@ -10,7 +10,9 @@ bot = commands.Bot(command_prefix='bonk.')
 
 @bot.command()
 async def kill(ctx):
-    if str(ctx.author) == "felix#2578":
+    # @Complete
+    # Shuts down the bot. Only the owner of the bot can shut it down
+    if await bot.is_owner(ctx.author):
         await ctx.send('Goodbye. Shutting down.')
         await bot.close()
 
