@@ -4,6 +4,11 @@ import weather
 import texttospeech
 from discord.ext import commands
 
+# @Complete = Function is complete. No further improvements necessarily needed
+# @Improve = Function's performance and code can be improved on and refactored
+# @Update = Function's code or features requires updating
+# @Feature = Function is missing core feature(s)
+
 token = open("tokens/token.txt", "r").read()
 
 bot = commands.Bot(command_prefix='bonk.')
@@ -19,14 +24,14 @@ async def kill(ctx):
 
 @bot.command(usage="bonk.tts source [language] [speed]")
 async def tts(ctx, source, language="en-us", speed="0"):
-    # @Improve - Responsiveness, memory usage
+    # @Improve - Responsiveness, memory usage, documentation
     # Plays the source string as text-to-speech in the caller's voice channel
     try:
         v_state = ctx.author.voice
         guild = ctx.message.guild
         if len(source) > 60:
             await ctx.send("Source cannot be longer than 60 characters. This is to reduce memory usage and bandwidth.")
-        elif v_state is not None:    # If the author of the command is in a voice channel
+        elif v_state is not None:
             if bot.user not in v_state.channel.members:
                 v_client = await v_state.channel.connect()
             else:
@@ -45,7 +50,7 @@ async def tts(ctx, source, language="en-us", speed="0"):
 
 @bot.command(usage="bonk.forecast city [country]")
 async def forecast(ctx, city, country=""):
-    # @Improve - Embedded contents, information
+    # @Update - Embedded contents, information
     # Gets the current forecast for the specified city and bulids
     # an embed object to display in the caller's text channel
     result = weather.get_current_weather(city, country)
@@ -98,6 +103,7 @@ async def on_message(message):
 
 @bot.event
 async def on_member_update(before, after):
+    # @Improve - Code (or remove altogether)
     if str(after) == "felix#2578" and str(after.status) == "offline":
         guild = after.guild
         channels = {}
