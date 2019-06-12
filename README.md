@@ -8,3 +8,4 @@ A Discord bot with cool featuresss
 ### Features
 - `forecast` Forecasts the current weather in the specified city
 - `tts` Joins the caller's voice channel and outputs audio from text
+- `texts` Extracts and posts the text from the specified image
