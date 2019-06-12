@@ -28,7 +28,8 @@ async def kill(ctx):
 async def texts(ctx, url, language="eng"):
     # Extracts the text from the specified image's URL and posts it in
     # the caller's text channel
-    await ctx.send(textdetect.get_parsed_text(url, language))
+    await ctx.send(f"I have extracted the following text with the language set to: {language}\n"
+                   f"```{textdetect.get_parsed_text(url, language)}```")
 
 
 @bot.command(usage="bonk.tts source [language] [speed]")
