@@ -30,7 +30,7 @@ def text(content):
 
 
 def main():
-    print(get_parsed_text("https://i.imgur.com/ezDZSkB.jpg", "eng"))
+    print(get_parsed_text("https://www.wikihow.com/images/thumb/2/21/Read-and-Write-Japanese-Fast-Step-12-Version-3.jpg/aid655240-v4-728px-Read-and-Write-Japanese-Fast-Step-12-Version-3.jpg ", "jpn"))
     # Language list:
     # Arabic = ara
     # Bulgarian = bul
