@@ -2,6 +2,7 @@ import discord
 import os
 import weather
 import texttospeech
+import textdetect
 from discord.ext import commands
 
 # @Complete = Function is complete. No further improvements necessarily needed
@@ -13,6 +14,7 @@ token = open("tokens/token.txt", "r").read()
 
 bot = commands.Bot(command_prefix='bonk.')
 
+
 @bot.command()
 async def kill(ctx):
     # @Complete
@@ -20,6 +22,13 @@ async def kill(ctx):
     if await bot.is_owner(ctx.author):
         await ctx.send('Goodbye. Shutting down.')
         await bot.close()
+
+
+@bot.command(usage="bonk.texts url [language]")
+async def texts(ctx, url, language="eng"):
+    # Extracts the text from the specified image's URL and posts it in
+    # the caller's text channel
+    await ctx.send(textdetect.get_parsed_text(url, language))
 
 
 @bot.command(usage="bonk.tts source [language] [speed]")

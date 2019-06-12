@@ -5,7 +5,7 @@ token = open("tokens/ocr_token.txt", "r").read()
 base_url = "https://api.ocr.space/parse/image"
 
 
-def get_parsed_text(url, language):
+def get_parsed_text(url, language="eng"):
     # Returns the detected text from the specified
     # image URL and language to detect
     api_url = f"{base_url}url"
@@ -31,6 +31,31 @@ def text(content):
 
 def main():
     print(get_parsed_text("https://i.imgur.com/ezDZSkB.jpg", "eng"))
+    # Language list:
+    # Arabic = ara
+    # Bulgarian = bul
+    # Chinese(Simplified) = chs
+    # Chinese(Traditional) = cht
+    # Croatian = hrv
+    # Czech = cze
+    # Danish = dan
+    # Dutch = dut
+    # English = eng
+    # Finnish = fin
+    # French = fre
+    # German = ger
+    # Greek = gre
+    # Hungarian = hun
+    # Korean = kor
+    # Italian = ita
+    # Japanese = jpn
+    # Polish = pol
+    # Portuguese = por
+    # Russian = rus
+    # Slovenian = slv
+    # Spanish = spa
+    # Swedish = swe
+    # Turkish = tur
 
 
 if __name__ == "__main__":
