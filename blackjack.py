@@ -1,6 +1,16 @@
 import random
 
+# @Complete = Function is complete. No further improvements necessarily needed
+# @Improve = Function's performance and code can be improved on and refactored
+# @Update = Function's code or features requires updating
+# @Feature = Function is missing core feature(s)
+
+
 class Card:
+    # Defines a Card object
+    # suit = The suit of the card as a string value
+    # value = The value of the card as a string value
+    # picture = An image representing the card's value and suit
     def __init__(self, suit, val, pic):
         self.suit = suit
         self.value = val
@@ -9,7 +19,10 @@ class Card:
     def show(self):
         print("{} of {}".format(self.picture, self.suit))
 
+
 class Deck:
+    # Defines a Deck object
+    # cards = A list containing more than 1 Card object
     def __init__(self):
         self.cards = []
         self.build()
@@ -23,30 +36,32 @@ class Deck:
                 self.cards.append(Card(s, 10, p))
 
     def shuffle(self):
-        for i in range(len(self.cards) -1, 0, -1):
+        for i in range(len(self.cards) - 1, 0, -1):
             r = random.randint(0, i)
             self.cards[i], self.cards[r] = self.cards[r], self.cards[i]
 
     def drawCard(self):
         return self.cards.pop()
-    
+
     def show(self):
         for c in self.cards:
             c.show()
+
 
 class Player:
     def __init__(self, name):
         self.name = name
         self.hand = []
         self.funds = 100
-        
+
     def draw(self, deck):
         self.hand.append(deck.drawCard())
         return self
-    
+
     def showHand(self):
         for card in self.hand:
             card.show()
+
 
 class PlayerList:
     def __init__(self):
@@ -55,7 +70,7 @@ class PlayerList:
     def add(self, player):
         self.playerdict[player.name] = player
 
-    
+
 def gameRound(pName):
     f = input("Hit (H), Stand (S), Double (D) or  Split (Sp)?\n")
     f.replace(" ", "")
@@ -71,7 +86,8 @@ def gameRound(pName):
             pass
         elif f == "Sp":
             pass
-    
+
+
 def main():
     dealer = Player("d")
     f = input("Your name?\n")
@@ -85,8 +101,8 @@ def main():
     print("\nDealer has")
     dealer.showHand()
     gameRound(player.name)
-    
-    
+
+
 pl = PlayerList()
 deck = Deck()
 deck.shuffle()
