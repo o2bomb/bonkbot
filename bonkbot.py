@@ -48,7 +48,7 @@ async def tts(ctx, source, language="en-us", speed="0"):
             else:
                 v_client = guild.voice_client
             texttospeech.get_tts(source, language, speed)
-            audio_src = discord.FFmpegPCMAudio('temp.mp3')
+            audio_src = discord.FFmpegPCMAudio('temp/tts.mp3')
             v_client.play(audio_src)
         else:
             ctx.send("Please join a voice channel before using this command.")

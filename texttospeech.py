@@ -18,7 +18,7 @@ def get_tts(source, language, speed):
 
     response = requests.get(api_url, params=payload)
     if response.status_code == 200:
-        with open("temp.mp3", "wb") as f:
+        with open("temp/tts.mp3", "wb") as f:
             f.write(response.content)
     else:
         print(f"Error: {response.content}")
