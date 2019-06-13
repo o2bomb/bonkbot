@@ -31,7 +31,7 @@ def video_url(content):
 
 
 def main():
-    get_streamable("https://www.reddit.com/r/recipes/comments/c02vpe/lemon_pie_french_chef_christophe_michalak/")
+    print(get_streamable("https://www.reddit.com/r/aww/comments/c03ahd/squishy_hedgehog/"))
 
 
 if __name__ == "__main__":

@@ -3,7 +3,7 @@ import os
 import weather
 import texttospeech
 import textdetect
-import vraw
+import streamable
 from discord.ext import commands
 
 # @Complete = Function is complete. No further improvements necessarily needed
@@ -14,6 +14,15 @@ from discord.ext import commands
 token = open("tokens/token.txt", "r").read()
 
 bot = commands.Bot(command_prefix='bonk.')
+
+
+@bot.command(usage="bonk.vraw url")
+async def vraw(ctx, url):
+    # Extracts the video file from the url and posts it in the caller's
+    # text channel as a streamable.com link
+    streamable_link = streamable.get_streamable(url)
+    await ctx.send("Here is your streamable link:")
+    await ctx.send(streamable_link)
 
 
 @bot.command()
@@ -110,12 +119,6 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     print(f"{message.author} in {message.channel}: \"{message.content}\"")
-
-    if "https://v.redd.it/" in message.content:
-        url = vraw.get_streamable(message.content)
-        if url is not None:
-            await message.channel.send("I have detected a v.redd.it file and embedded it for you:")
-            await message.channel.send(url)
     await bot.process_commands(message)
 
 
