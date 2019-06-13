@@ -3,6 +3,7 @@ import os
 import weather
 import texttospeech
 import textdetect
+import vraw
 from discord.ext import commands
 
 # @Complete = Function is complete. No further improvements necessarily needed
@@ -109,6 +110,12 @@ async def on_ready():
 @bot.event
 async def on_message(message):
     print(f"{message.author} in {message.channel}: \"{message.content}\"")
+
+    if "https://v.redd.it/" in message.content:
+        url = vraw.get_streamable(message.content)
+        if url is not None:
+            await message.channel.send("I have detected a v.redd.it file and embedded it for you:")
+            await message.channel.send(url)
     await bot.process_commands(message)
 
 
